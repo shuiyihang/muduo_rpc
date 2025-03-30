@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package example;
+
+// 生成rpc 服务，否则默认不生成，cc_ 表示生成 c++代码
+option cc_generic_services = true;
+
+
+message ResultCode
+{
+    int32 errCode = 1;
+    bytes errMsg = 2;
+}
+
+message LoginRequest
+{
+    bytes name = 1;
+    bytes pwd = 2;
+}
+
+message LoginResponse
+{
+    ResultCode result = 1;
+    bool success = 2;
+}
+
+service LoginServiceRpc
+{
+    rpc Login(LoginRequest) returns(LoginResponse);
+}
